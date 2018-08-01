@@ -1,7 +1,11 @@
 package guru.springframework.recipeproject.domain;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 public class Notes {
 
@@ -11,15 +15,7 @@ public class Notes {
     @Lob
     private String recipeNotes;
     @OneToOne//nećemo definirati cascade jer je Recipe objekt owner veze(ako obrišemo recept neka se brišu i notes, a ne obrnuto)
+    @EqualsAndHashCode.Exclude
     private Recipe recipe;
 
-    public Long getId() { return id; }
-
-    public void setId(Long id) { this.id = id; }
-
-    public String getRecipeNotes() { return recipeNotes; }
-    public void setRecipeNotes(String recipeNotes) { this.recipeNotes = recipeNotes; }
-
-    public Recipe getRecipe() { return recipe; }
-    public void setRecipe(Recipe recipe) { this.recipe = recipe; }
 }
